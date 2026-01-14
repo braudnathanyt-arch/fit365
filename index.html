@@ -18,36 +18,21 @@
     </nav>
 
     <section class="hero">
-    <h1>Bienvenu <span>FIT365</span></h1>
-    <p>L'intelligence artificielle au service de ton physique. Nutrition sur mesure, entraînement d'élite et suivi de précision.</p>
-    
-    <div id="auth-buttons" style="display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; margin-top: 20px;">
-        <a href="login.html" class="btn-gold">CONNEXION</a>
-        <a href="register.html" style="color: white; text-decoration: none; border: 1px solid #333; padding: 20px 40px; border-radius: 50px; font-weight: 700;">S'INSCRIRE</a>
-    </div>
-    
-    <div id="welcome-msg" style="display: none; margin-top: 20px;">
-        <h2 style="color: var(--gold);">BIENVENU DANS L'ÉLITE</h2>
-        <button onclick="deconnexion()" style="background: transparent; color: #666; border: none; cursor: pointer; text-decoration: underline;">Se déconnecter</button>
-    </div>
-</section>
-
-<script>
-    // Vérifie si l'utilisateur est connecté au chargement
-    window.onload = function() {
-        const user = localStorage.getItem('fit_account');
-        if (user) {
-            document.getElementById('auth-buttons').style.display = 'none';
-            document.getElementById('welcome-msg').style.display = 'block';
-        }
-    }
-
-    function deconnexion() {
-        localStorage.removeItem('fit_account');
-        location.reload();
-    }
-</script>
+        <h1>Bienvenue <span>FIT365</span></h1>
+        <p>L'intelligence artificielle au service de ton physique. Nutrition sur mesure, entraînement d'élite et suivi de précision.</p>
         
+        <div id="auth-buttons" style="display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; margin-top: 20px;">
+            <a href="login.html" class="btn-gold">CONNEXION</a>
+            <a href="register.html" style="color: white; text-decoration: none; border: 1px solid #333; padding: 20px 40px; border-radius: 50px; font-weight: 700;">S'INSCRIRE</a>
+        </div>
+        
+        <div id="welcome-msg" style="display: none; margin-top: 20px;">
+            <h2 style="color: var(--gold); font-family: 'Archivo Black';">BIENVENU DANS L'ÉLITE</h2>
+            <div style="display: flex; flex-direction: column; gap: 10px; align-items: center;">
+                <a href="change-password.html" style="color: #666; text-decoration: none; font-size: 0.8rem;">Modifier mon mot de passe</a>
+                <button onclick="deconnexion()" style="background: transparent; color: #d4af37; border: 1px solid #d4af37; padding: 10px 20px; border-radius: 5px; cursor: pointer; margin-top: 10px;">SE DÉCONNECTER</button>
+            </div>
+        </div>
     </section>
 
     <section class="features">
@@ -69,5 +54,19 @@
         <p>© 2026 FIT365 ELITE COACHING. TOUS DROITS RÉSERVÉS.</p>
     </footer>
 
+    <script>
+        window.onload = function() {
+            const user = localStorage.getItem('fit_account');
+            if (user) {
+                document.getElementById('auth-buttons').style.display = 'none';
+                document.getElementById('welcome-msg').style.display = 'block';
+            }
+        }
+
+        function deconnexion() {
+            localStorage.removeItem('fit_account');
+            location.reload();
+        }
+    </script>
 </body>
 </html>
