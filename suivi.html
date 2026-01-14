@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FIT365 | Inscription & Profil</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body style="background: var(--black); color: white;">
+    <nav class="top-nav">
+        <a href="index.html" class="logo">FIT<span>365</span></a>
+        <div class="nav-links">
+            <a href="index.html">DASHBOARD</a>
+            <a href="repas.html">NUTRITION</a>
+            <a href="suivi.html" class="active">PROFIL</a>
+        </div>
+    </nav>
+
+    <main style="padding: 100px 8%; max-width: 600px; margin: auto;">
+        <h1 style="font-family: 'Archivo Black', sans-serif; color: var(--gold); text-transform: uppercase; margin-bottom: 30px;">
+            MON PROFIL <span>PHYSIQUE</span>
+        </h1>
+        
+        <div style="display: grid; gap: 15px;">
+            <input type="text" id="username" placeholder="Ton Prénom" style="width:100%; padding: 15px; background: var(--dark); border: 1px solid var(--grey); border-radius: 5px; color: white;">
+            
+            <input type="number" id="poids" placeholder="Poids actuel (kg)" style="width:100%; padding: 15px; background: var(--dark); border: 1px solid var(--grey); border-radius: 5px; color: white;">
+            
+            <input type="number" id="taille" placeholder="Taille (cm)" style="width:100%; padding: 15px; background: var(--dark); border: 1px solid var(--grey); border-radius: 5px; color: white;">
+            
+            <input type="number" id="age" placeholder="Âge" style="width:100%; padding: 15px; background: var(--dark); border: 1px solid var(--grey); border-radius: 5px; color: white;">
+            
+            <select id="objectif" style="width:100%; padding: 15px; background: var(--dark); border: 1px solid var(--grey); border-radius: 5px; color: white;">
+                <option value="Prise de masse">Prise de masse</option>
+                <option value="Perte de poids">Perte de poids</option>
+                <option value="Maintien">Maintien</option>
+            </select>
+            
+            <button class="btn-gold" onclick="sauvegarderProfil()" style="width: 100%; margin-top: 20px; border: none; cursor: pointer;">
+                ENREGISTRER MON PROFIL
+            </button>
+        </div>
+    </main>
+
+    <script>
+        function sauvegarderProfil() {
+            const user = {
+                nom: document.getElementById('username').value,
+                poids: document.getElementById('poids').value,
+                taille: document.getElementById('taille').value,
+                age: document.getElementById('age').value,
+                obj: document.getElementById('objectif').value
+            };
+            
+            if(!user.nom || !user.poids) return alert("Remplis au moins ton prénom et ton poids !");
+            
+            localStorage.setItem('fitUser', JSON.stringify(user));
+            alert("Compte créé ! Bienvenue " + user.nom);
+            window.location.href = "index.html"; // Redirige vers l'accueil une fois fini
+        }
+    </script>
+</body>
+</html>
