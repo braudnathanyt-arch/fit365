@@ -18,13 +18,35 @@
     </nav>
 
     <section class="hero">
-        <h1>BEYOND <span>LIMITS</span></h1>
-        <p>L'intelligence artificielle au service de ton physique. Nutrition sur mesure, entraînement d'élite et suivi de précision.</p>
-        
-        <div style="display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; margin-top: 20px;">
-            <a href="login.html" class="btn-gold">CONNEXION</a>
-            <a href="register.html" style="color: white; text-decoration: none; border: 1px solid #333; padding: 20px 40px; border-radius: 50px; font-weight: 700;">S'INSCRIRE</a>
-        </div>
+    <h1>BEYOND <span>LIMITS</span></h1>
+    <p>L'intelligence artificielle au service de ton physique. Nutrition sur mesure, entraînement d'élite et suivi de précision.</p>
+    
+    <div id="auth-buttons" style="display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; margin-top: 20px;">
+        <a href="login.html" class="btn-gold">CONNEXION</a>
+        <a href="register.html" style="color: white; text-decoration: none; border: 1px solid #333; padding: 20px 40px; border-radius: 50px; font-weight: 700;">S'INSCRIRE</a>
+    </div>
+    
+    <div id="welcome-msg" style="display: none; margin-top: 20px;">
+        <h2 style="color: var(--gold);">BIENVENU DANS L'ÉLITE</h2>
+        <button onclick="deconnexion()" style="background: transparent; color: #666; border: none; cursor: pointer; text-decoration: underline;">Se déconnecter</button>
+    </div>
+</section>
+
+<script>
+    // Vérifie si l'utilisateur est connecté au chargement
+    window.onload = function() {
+        const user = localStorage.getItem('fit_account');
+        if (user) {
+            document.getElementById('auth-buttons').style.display = 'none';
+            document.getElementById('welcome-msg').style.display = 'block';
+        }
+    }
+
+    function deconnexion() {
+        localStorage.removeItem('fit_account');
+        location.reload();
+    }
+</script>
         
     </section>
 
