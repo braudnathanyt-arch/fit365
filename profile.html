@@ -5,6 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FIT365 | Mon Profil Élite</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        .profile-input {
+            width: 100%;
+            padding: 12px;
+            background: #111;
+            border: 1px solid var(--grey);
+            border-radius: 8px;
+            color: white;
+            font-family: 'Inter', sans-serif;
+            margin-top: 5px;
+            display: none; /* Caché par défaut */
+        }
+        .profile-value {
+            font-size: 1.2rem;
+            margin: 5px 0;
+            font-weight: 400;
+            display: block;
+        }
+    </style>
 </head>
 <body style="background: var(--black); color: white; margin: 0;">
 
@@ -25,7 +44,7 @@
                 <h1 style="font-family: 'Archivo Black', sans-serif; color: var(--gold); font-size: clamp(2rem, 5vw, 3.5rem); text-transform: uppercase; margin: 0;">
                     Profil <span style="color: white;">Membre</span>
                 </h1>
-                <p style="color: #666; font-size: 1.1rem; margin-top: 10px;">Gère tes accès et tes informations personnelles FIT365.</p>
+                <p style="color: #666;">Gère tes accès et tes informations personnelles FIT365.</p>
             </div>
 
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px;">
@@ -35,71 +54,95 @@
                     
                     <div style="display: grid; gap: 25px; margin-top: 25px;">
                         <div>
-                            <label style="color: var(--gold); font-size: 0.7rem; font-weight: 900; text-transform: uppercase;">Nom de l'athlète</label>
-                            <p id="display-name" style="font-size: 1.2rem; margin: 5px 0; font-weight: 400;">Non renseigné</p>
+                            <label style="color: var(--gold); font-size: 0.7rem; font-weight: 900; text-transform: uppercase;">Nom complet</label>
+                            <span id="view-name" class="profile-value">Jean Dupont</span>
+                            <input type="text" id="edit-name" class="profile-input">
                         </div>
                         
                         <div>
                             <label style="color: var(--gold); font-size: 0.7rem; font-weight: 900; text-transform: uppercase;">Adresse Email</label>
-                            <p id="display-email" style="font-size: 1.2rem; margin: 5px 0; font-weight: 400;">chargement...</p>
+                            <span id="view-email" class="profile-value">email@exemple.com</span>
+                            <input type="email" id="edit-email" class="profile-input">
                         </div>
 
                         <div>
-                            <label style="color: var(--gold); font-size: 0.7rem; font-weight: 900; text-transform: uppercase;">Numéro de téléphone</label>
-                            <p id="display-phone" style="font-size: 1.2rem; margin: 5px 0; font-weight: 400;">+33 6 -- -- -- --</p>
+                            <label style="color: var(--gold); font-size: 0.7rem; font-weight: 900; text-transform: uppercase;">Téléphone</label>
+                            <span id="view-phone" class="profile-value">+33 6 -- -- -- --</span>
+                            <input type="tel" id="edit-phone" class="profile-input">
                         </div>
                     </div>
 
-                    <button onclick="alert('Fonctionnalité de modification bientôt disponible')" 
-                            style="margin-top: 30px; background: transparent; border: 1px solid #333; color: #888; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-size: 0.8rem;">
-                        MODIFIER MES INFOS
-                    </button>
+                    <div style="margin-top: 30px; display: flex; gap: 10px;">
+                        <button id="btn-edit" onclick="toggleEdit(true)" class="btn-gold" style="padding: 10px 20px; font-size: 0.8rem; border: none; cursor: pointer;">MODIFIER</button>
+                        <button id="btn-save" onclick="saveProfile()" class="btn-gold" style="display: none; padding: 10px 20px; font-size: 0.8rem; border: none; cursor: pointer; background: #2ecc71; color: white;">ENREGISTRER</button>
+                        <button id="btn-cancel" onclick="toggleEdit(false)" style="display: none; background: transparent; border: 1px solid #ff4444; color: #ff4444; padding: 10px 20px; border-radius: 50px; cursor: pointer; font-size: 0.8rem;">ANNULER</button>
+                    </div>
                 </div>
 
                 <div class="feature-card" style="display: flex; flex-direction: column; justify-content: space-between; text-align: left;">
                     <div>
                         <h3 style="margin-top: 0; border-bottom: 1px solid var(--grey); padding-bottom: 20px; letter-spacing: 1px;">SÉCURITÉ</h3>
-                        <p style="color: #555; font-size: 0.9rem; margin-top: 20px;">Statut du compte : <span style="color: #2ecc71;">ACTIF (ÉLITE)</span></p>
+                        <p style="color: #555; font-size: 0.9rem; margin-top: 20px;">Statut du compte : <span style="color: #d4af37;">MEMBRE ÉLITE</span></p>
                     </div>
 
                     <div style="display: grid; gap: 15px; margin-top: 40px;">
-                        <a href="change-password.html" class="btn-gold" style="text-align: center; padding: 15px; font-size: 0.9rem;">
-                            CHANGER MON MOT DE PASSE
-                        </a>
-                        
-                        <button onclick="deconnexion()" 
-                                style="background: #111; color: #ff4444; border: 1px solid #ff4444; padding: 15px; border-radius: 50px; cursor: pointer; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s;">
-                            SE DÉCONNECTER
-                        </button>
+                        <a href="change-password.html" style="text-align: center; color: white; text-decoration: none; border: 1px solid #333; padding: 15px; border-radius: 50px; font-size: 0.8rem; font-weight: bold;">CHANGER LE MOT DE PASSE</a>
+                        <button onclick="deconnexion()" style="background: transparent; color: #ff4444; border: 1px solid #ff4444; padding: 15px; border-radius: 50px; cursor: pointer; font-weight: 900; text-transform: uppercase;">DÉCONNEXION</button>
                     </div>
                 </div>
-
             </div>
         </div>
     </main>
 
-    <footer style="text-align: center; padding: 50px; color: #222; border-top: 1px solid #111; margin-top: 50px;">
-        <p>© 2026 FIT365 ELITE COACHING. TOUS DROITS RÉSERVÉS.</p>
-    </footer>
-
     <script>
-        // Vérification de la connexion au chargement
+        // 1. Charger les données au démarrage
         window.onload = function() {
-            const userData = localStorage.getItem('fit_account');
-            
+            const userData = JSON.parse(localStorage.getItem('fit_account'));
             if (!userData) {
-                // Si pas de compte en mémoire, retour à la connexion
                 window.location.href = 'login.html';
             } else {
-                const user = JSON.parse(userData);
-                document.getElementById('display-email').innerText = user.email;
-                
-                // Si tu as stocké le nom dans le futur, on l'affichera ici
-                if(user.name) document.getElementById('display-name').innerText = user.name;
+                updateUI(userData);
             }
         }
 
-        // Fonction de déconnexion reprise de ton index
+        function updateUI(user) {
+            document.getElementById('view-name').innerText = user.name || "Non renseigné";
+            document.getElementById('view-email').innerText = user.email;
+            document.getElementById('view-phone').innerText = user.phone || "Non renseigné";
+            
+            // Pré-remplir les inputs
+            document.getElementById('edit-name').value = user.name || "";
+            document.getElementById('edit-email').value = user.email;
+            document.getElementById('edit-phone').value = user.phone || "";
+        }
+
+        // 2. Basculer entre mode Vue et mode Édition
+        function toggleEdit(isEditing) {
+            const views = document.querySelectorAll('.profile-value');
+            const inputs = document.querySelectorAll('.profile-input');
+            
+            views.forEach(v => v.style.display = isEditing ? 'none' : 'block');
+            inputs.forEach(i => i.style.display = isEditing ? 'block' : 'none');
+
+            document.getElementById('btn-edit').style.display = isEditing ? 'none' : 'block';
+            document.getElementById('btn-save').style.display = isEditing ? 'block' : 'none';
+            document.getElementById('btn-cancel').style.display = isEditing ? 'block' : 'none';
+        }
+
+        // 3. Sauvegarder les modifications dans le LocalStorage
+        function saveProfile() {
+            const user = JSON.parse(localStorage.getItem('fit_account'));
+            
+            user.name = document.getElementById('edit-name').value;
+            user.email = document.getElementById('edit-email').value;
+            user.phone = document.getElementById('edit-phone').value;
+
+            localStorage.setItem('fit_account', JSON.stringify(user));
+            updateUI(user);
+            toggleEdit(false);
+            alert("Profil mis à jour avec succès !");
+        }
+
         function deconnexion() {
             localStorage.removeItem('fit_account');
             window.location.href = 'index.html';
